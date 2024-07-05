@@ -35,16 +35,30 @@ h1{
 .tasks{
     display: flex;
     justify-content: center;
-    align-items: center;
     margin: 4rem auto;
     flex-direction: column;
-    gap: 5px;
+    gap: 15px;
     background-color: gray;
     max-width: 500px;
     min-width: 200px;
-    max-height: 500px;
     min-height: 200px;
     padding: 10px;
     border-radius: 10px;
     color: white;
+}
+
+.tasks div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 90%;
+    background-color: blue;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.tasks div li {
+    list-style: none;
 }
