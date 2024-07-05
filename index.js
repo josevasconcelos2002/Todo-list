@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const completedTasks = document.querySelector(".completed");
     let i = 0;
 
-    let tasks = [];
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];;
 
     addTaskButton.addEventListener("click", function() {
         const taskDescription = description.value.trim();
@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         description.value = "";
         renderTasks();
+        saveTasks();
     });
 
     function formatDate(timestamp) {
@@ -31,6 +32,12 @@ document.addEventListener("DOMContentLoaded", function() {
         const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
+    }
+
+        function removeTask(taskId) {
+        tasks = tasks.filter(t => t.id !== taskId);
+        saveTasks();
+        renderTasks();
     }
 
     function renderTasks() {
@@ -56,11 +63,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.log(task);
                 console.log(tasks);
                 taskList.removeChild(div);
+                window.alert(`Task "${task.description}" has been completed`);
                 tasks.pop(task);
+                removeTask(task.id);
                 console.log(tasks);
             })
             console.log(tasks);
         });
     }
+
+    function saveTasks() {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    renderTasks();
 
 });
